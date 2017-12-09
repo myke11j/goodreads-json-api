@@ -1,0 +1,24 @@
+{
+  "name": "goodreads-json-api",
+  "version": "1.0.0",
+  "description": "Library to get Goodreads API response in JSON format",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myke11j/goodreads-json-api.git"
+  },
+  "keywords": [
+    "goodreads",
+    "api",
+    "json"
+  ],
+  "author": "Mukul <@mukul1904>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myke11j/goodreads-json-api/issues"
+  },
+  "homepage": "https://github.com/myke11j/goodreads-json-api#readme"
+}
