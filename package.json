@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/myke11j/goodreads-json-api/issues"
   },
-  "homepage": "https://github.com/myke11j/goodreads-json-api#readme"
+  "homepage": "https://github.com/myke11j/goodreads-json-api#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
+  }
 }
