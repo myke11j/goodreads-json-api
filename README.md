@@ -6,7 +6,7 @@ Library to get Goodreads API response in JSON format
 The reason I build this project, was because I needed a way to get data from Goodreads API as json. And most of the API returns their data as XML. 
 
 This packages don't call goodreads apis internally, it just takes the XML response and returns the parse JSON object.
-For xml parsing, I've used [cheerio](https://www/npm.com/package/cheerio) project.
+For xml parsing, I've used [cheerio](https://www.npmjs.com/package/cheerio) project.
 
 # Usage
 
