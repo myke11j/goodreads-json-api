@@ -4,7 +4,8 @@
   "description": "Library to get Goodreads API response in JSON format",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "demo": "node demo/demo.js"
   },
   "repository": {
     "type": "git",
