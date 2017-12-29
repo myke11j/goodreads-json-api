@@ -2,7 +2,7 @@
 
 module.exports = [
   {
-    'transformer_type': 'Request',
+    'type': 'Request',
     'mapping': [
       {
         'key': 'key',
@@ -22,7 +22,7 @@ module.exports = [
   },
 
   {
-    'transformer_type': 'work-ids',
+    'type': 'work-ids',
     'mapping': [
       {
         'key': 'item',
@@ -32,7 +32,7 @@ module.exports = [
   },
 
   {
-    'transformer_type': 'book',
+    'type': 'book',
     'mapping': [
       {
         'key': 'isbn',
@@ -113,7 +113,7 @@ module.exports = [
   },
 
   {
-    'transformer_type': 'author',
+    'type': 'author',
     'mapping': [
       {
         'key': 'id',
@@ -135,76 +135,38 @@ module.exports = [
   },
 
   {
-    'transformer_type': 'popular_shelves',
+    'type': 'popular_shelves',
     'mapping': [
       {
         'key': 'shelf',
-        'jsonKey': 'shelves',
-        'helper': 'getPopularCategories'
+        'jsonKey': 'shelfList',
+        'helper': 'shelf'
       },
     ]
   },
 
-  // {
-  //   'transformer_type': 'similar_books',
-  //   'mapping': [
-  //     {
-  //       'key': 'id',
-  //       'jsonKey': 'goodreads_id'
-  //     },
-  //     {
-  //       'key': 'isbn13',
-  //       'jsonKey': 'isbn13',
-  //       'helper': 'getISBN'
-  //     },
-  //     {
-  //       'key': 'title',
-  //       'jsonKey': 'title',
-  //       'helper': 'getISBN'
-  //     },
-  //     {
-  //       'key': 'url',
-  //       'jsonKey': 'url',
-  //       'helper': 'getISBN'
-  //     },
-  //     {
-  //       'key': 'small_image_url',
-  //       'jsonKey': 'small_image_url'
-  //     },
-  //     {
-  //       'key': 'num_pages',
-  //       'jsonKey': 'num_pages',
-  //       'helper': 'getISBN'
-  //     },
-  //     {
-  //       'key': 'image_url',
-  //       'jsonKey': 'image_url'
-  //     },
-  //     {
-  //       'key': 'link',
-  //       'jsonKey': 'link',
-  //       'helper': 'getISBN'
-  //     },
-  //     {
-  //       'key': 'publication_day',
-  //       'jsonKey': 'publication_day'
-  //     },
-  //     {
-  //       'key': 'publication_year',
-  //       'jsonKey': 'publication_year'
-  //     },
-  //     {
-  //       'key': 'publication_month',
-  //       'jsonKey': 'publication_month'
-  //     },
-  //     {
-  //       'key': 'average_rating',
-  //       'jsonKey': 'average_rating'
-  //     },
-  //     {
-  //       'key': 'ratings_count',
-  //       'jsonKey': 'ratings_count'
-  //     }
-  //   ]
-  // },
+  {
+    'type': 'shelf',
+    'mapping': [
+      {
+        'key': 'name',
+        'jsonKey': 'name'
+      },
+      {
+        'key': 'count',
+        'jsonKey': 'count'
+      }
+    ]
+  },
+
+  {
+    'type': 'similar_books',
+    'mapping': [
+      {
+        'key': 'book',
+        'jsonKey': 'book',
+        'transformer': 'book'
+      }
+    ]
+  },
 ];
