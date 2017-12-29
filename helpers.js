@@ -22,7 +22,9 @@ helpers.getISBN = (cDataISBN) => {
 }
 
 helpers.getPopularCategories = (popularShelves) => {
-    popularShelves = popularShelves.slice(0, 5);
+    if (popularShelves.length > 20) {
+        popularShelves = popularShelves.slice(0, 20);
+    }
     const shelves = [];
     popularShelves.map((shelve) => {
         shelves.push({
