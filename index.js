@@ -28,12 +28,6 @@ goodReadsJSONResponse.convertToJson = (xmlData) => {
                 if (mapItem.helper && helpers[mapItem.helper]) {
                     resp[mapItem.jsonKey] = helpers[mapItem.helper]($('popular_shelves').find('shelf'));
                 }
-            } else if (element === 'similar_books') {
-                if ($('similar_books').find('book').length <= 0) return;
-                const resp = [];
-                $('similar_books').find('book').map((book) => {
-                    console.log($('similar_books').find('book')[book].attribs);
-                });
             } else {
                 const element2 = element + ' ' + mapItem.key;
                 resp[mapItem.jsonKey] = $(element2).html();
