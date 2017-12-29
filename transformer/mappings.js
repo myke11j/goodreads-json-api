@@ -103,7 +103,12 @@ module.exports = [
       {
         'key': 'ratings_count',
         'jsonKey': 'ratings_count'
-      }
+      },
+      {
+        'key': 'description',
+        'jsonKey': 'description',
+        'helper': 'getISBN'
+      },
     ]
   },
 
@@ -111,10 +116,38 @@ module.exports = [
     'transformer_type': 'author',
     'mapping': [
       {
-        'key': 'isbn',
-        'jsonKey': 'isbn',
-        'helper': 'getISBN'
+        'key': 'id',
+        'jsonKey': 'author_id'
       },
+      {
+        'key': 'name',
+        'jsonKey': 'name'
+      },
+      {
+        'key': 'average_rating',
+        'jsonKey': 'average_rating'
+      },
+      {
+        'key': 'ratings_count',
+        'jsonKey': 'ratings_count'
+      },
+    ]
+  },
+
+  {
+    'transformer_type': 'popular_shelves',
+    'mapping': [
+      {
+        'key': 'shelf',
+        'jsonKey': 'shelves',
+        'helper': 'getPopularCategories'
+      },
+    ]
+  },
+
+  {
+    'transformer_type': 'similar_books',
+    'mapping': [
       {
         'key': 'id',
         'jsonKey': 'goodreads_id'
@@ -126,7 +159,8 @@ module.exports = [
       },
       {
         'key': 'title',
-        'jsonKey': 'title'
+        'jsonKey': 'title',
+        'helper': 'getISBN'
       },
       {
         'key': 'url',
@@ -152,15 +186,6 @@ module.exports = [
         'helper': 'getISBN'
       },
       {
-        'key': 'format',
-        'jsonKey': 'format',
-        'helper': 'getISBN'
-      },
-      {
-        'key': 'publisher',
-        'jsonKey': 'publisher'
-      },
-      {
         'key': 'publication_day',
         'jsonKey': 'publication_day'
       },
@@ -181,5 +206,5 @@ module.exports = [
         'jsonKey': 'ratings_count'
       }
     ]
-  }
+  },
 ];

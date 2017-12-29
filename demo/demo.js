@@ -8,7 +8,10 @@
 const https = require('https');
 const goodReadsJSONResponse = require('../index');
 
-const API = 'https://www.goodreads.com/book/isbn/0441172717?key=Uxb0zPb86N4STVy2ECWYA';
+const author = 'Neil Gaiman';
+const book = 'Neverwhere';
+
+const API = `https://www.goodreads.com/book/title.xml?author=${author}&key=Uxb0zPb86N4STVy2ECWYA&title=${book}`;
 
 https.get(API, (res) => {
     res.setEncoding('utf8');

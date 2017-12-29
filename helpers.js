@@ -21,4 +21,16 @@ helpers.getISBN = (cDataISBN) => {
     return matched;
 }
 
+helpers.getPopularCategories = (popularShelves) => {
+    popularShelves = popularShelves.slice(0, 5);
+    const shelves = [];
+    popularShelves.map((shelve) => {
+        shelves.push({
+            count: popularShelves[shelve].attribs.count,
+            name: popularShelves[shelve].attribs.name
+        });
+    });
+    return shelves;
+}
+
 module.exports = helpers;

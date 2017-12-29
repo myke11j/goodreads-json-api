@@ -23,10 +23,23 @@ goodReadsJSONResponse.convertToJson = (xmlData) => {
         const resp = response[element];
         const mapping = item.mapping;
         mapping.forEach((mapItem, index2) => {
-            element = ' ' + mapItem.key;
-            resp[mapItem.jsonKey] = $(element).html();
-            if (mapItem.helper && helpers[mapItem.helper]) {
-                resp[mapItem.jsonKey] = helpers[mapItem.helper](resp[mapItem.jsonKey]);
+            if (element === 'popular_shelves') {
+                if ($('popular_shelves').find('shelf').length <= 0) return;
+                if (mapItem.helper && helpers[mapItem.helper]) {
+                    resp[mapItem.jsonKey] = helpers[mapItem.helper]($('popular_shelves').find('shelf'));
+                }
+            } else if (element === 'similar_books') {
+                if ($('similar_books').find('book').length <= 0) return;
+                const resp = [];
+                $('similar_books').find('book').map((book) => {
+                    console.log($('similar_books').find('book')[book].attribs);
+                });
+            } else {
+                const element2 = element + ' ' + mapItem.key;
+                resp[mapItem.jsonKey] = $(element2).html();
+                if (mapItem.helper && helpers[mapItem.helper]) {
+                    resp[mapItem.jsonKey] = helpers[mapItem.helper](resp[mapItem.jsonKey]);
+                }
             }
         });
     });
