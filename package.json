@@ -1,6 +1,6 @@
 {
   "name": "goodreads-json-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Library to get Goodreads API response in JSON format",
   "main": "index.js",
   "scripts": {
