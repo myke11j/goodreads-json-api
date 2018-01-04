@@ -1,10 +1,15 @@
 'use strict'
 
 const cheerio = require('cheerio');
-
+const async = require('async');
 const transformer = require('./transformer');
 const helpers = require('./helpers');
 const goodReadsJSONResponse = {};
+const options = {
+    xml: {
+        normalizeWhitespace: true
+    }
+};
 
 const transform = (params) => {
     const { $, transformer, doc, prevNode } = params;
@@ -14,6 +19,7 @@ const transform = (params) => {
     }
     transformer.mapping.forEach((mapItem) => {
         const xmlNode = parentNode + transformer.type + ' ' + mapItem.key;
+        // console.log(xmlNode, $(xmlNode).html());
         doc[mapItem.jsonKey] = $(xmlNode).html();
         if (mapItem.helper && helpers[mapItem.helper]) {
             doc[mapItem.jsonKey] = helpers[mapItem.helper](doc[mapItem.jsonKey]);
@@ -40,25 +46,27 @@ const transformList = (params) => {
     }
 }
 
-const transformBooks = (params) => {
+const transformBooks = function (params) {
     const { $, transformer, prevNode, doc, rootTtransformer } = params;
     let parentNode = '';
     if (prevNode) {
         parentNode += prevNode + ' ';
     }
-    const count = $(parentNode).find(transformer.type).slice(0, 3);
-    for (var index = 0; index < count.length; index++) {
-        console.log($(parentNode).find(transformer.type)[index].children[index].name);
-    }
-    // doc.push();
+    const similiarBooks = $(parentNode).html().toString().split('<book>').slice(0, 5);
+    async.eachSeries(similiarBooks, (element, cb) => {
+        if (element.length === 1) return cb();
+        let book = {};
+        transform({
+            transformer, doc: book, $: cheerio.load('<book>' + element, options)
+        });
+        doc.push(book);
+        cb();
+    }, (err) => {
+        return true;
+    });
 }
 
 goodReadsJSONResponse.convertToJson = (xmlData) => {
-    const options = {
-        xml: {
-            normalizeWhitespace: true
-        }
-    };
     const $ = cheerio.load(xmlData, options);
     let response = {};
     transformer.mappings.forEach((item, index) => {
@@ -80,17 +88,17 @@ goodReadsJSONResponse.convertToJson = (xmlData) => {
                     });
                     break;
                 case 'similar_books':
-                    // if ($('similar_books').find('book').length <= 0) return;
-                    // response[element] = [];
-                    // const cloneDoc = JSON.parse(JSON.stringify(response[element]));
-                    // transformBooks({
-                    //     transformer: transformer.mappings.filter(mapping => mapping.type === 'book')[0],
-                    //     doc: cloneDoc,
-                    //     $,
-                    //     prevNode: 'similar_books',
-                    //     rootTtransformer: transformer
-                    // });
-                    // response[element] = cloneDoc;
+                    if ($('similar_books').find('book').length <= 0) return;
+                    response[element] = [];
+                    const cloneDoc = JSON.parse(JSON.stringify(response[element]));
+                    transformBooks({
+                        transformer: transformer.mappings.filter(mapping => mapping.type === 'book')[0],
+                        doc: cloneDoc,
+                        $,
+                        prevNode: 'similar_books',
+                        rootTtransformer: transformer
+                    });
+                    response[element] = cloneDoc;
                     break;
                 default:
                     response[element] = {};
@@ -101,27 +109,6 @@ goodReadsJSONResponse.convertToJson = (xmlData) => {
                     response[element] = cloneDoc2;
                     break;
             }
-            // if (element === 'popular_shelves') {
-                // transform({
-                //     transformer: item, doc: resp, $, prevNode: 'popular_shelves'
-                // });
-                // if ($('popular_shelves').find('shelf').length <= 0) return;
-                // if (mapItem.helper && helpers[mapItem.helper]) {
-                //     resp[mapItem.jsonKey] = helpers[mapItem.helper]($('popular_shelves').find('shelf'));
-                // }
-            // } 
-            // else if (element === 'similar_books') {
-            //     if ($('similar_books').find('book').length <= 0) return;
-            //     const trans2 = transformer.mappings.filter(mapping => mapping.type === mapItem.transformer)[0];
-                // transform({
-                //     transformer: trans2, doc: resp, $, prevNode: 'similar_books'
-                // });
-            // } 
-            // else {
-            //     transform({
-            //         transformer: item, doc: resp, $
-            //     });
-            // }
         });
     });
     return response;

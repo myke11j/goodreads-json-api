@@ -22,6 +22,7 @@ helpers.stripCDATA = (cDataISBN) => {
 }
 
 helpers.newStripCDATA = (text) => {
+    if (!text) return text;
     if (text.indexOf('<!\[CDATA\[') === 0) {
         text = text.substring('<!\[CDATA\['.length, text.length)
     }
@@ -44,6 +45,7 @@ helpers.getPopularCategories = (popularShelves) => {
 }
 
 helpers.stripHTML = (text) => {
+    if (!text) return text;
     if (text.indexOf('<!\[CDATA\[') === 0) {
         text = text.substring('<!\[CDATA\['.length, text.length)
     }
