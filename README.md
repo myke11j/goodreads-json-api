@@ -64,9 +64,9 @@ I would greatly appreciate if you can also contribute to this project in any way
 Currently this converts following xml nodes of Goodreads response:
 - author
 - books
-- reviews
 - similiar_books
 - request
+- popular_shelves
 
 For every node, we've a transformer, which you can find [here](https://github.com/myke11j/goodreads-json-api/blob/master/transformer/mappings.js). These transformers are simple json which converts xml to json.
 You can add any other node, which I've missed here and create a PR.
