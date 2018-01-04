@@ -11,7 +11,8 @@ const goodReadsJSONResponse = require('../index');
 const author = 'Neil Gaiman';
 const book = 'Neverwhere';
 
-const API = `https://www.goodreads.com/book/title.xml?author=${author}&key=Uxb0zPb86N4STVy2ECWYA&title=${book}`;
+// const API = `https://www.goodreads.com/book/title.xml?author=${author}&key=Uxb0zPb86N4STVy2ECWYA&title=${book}`;
+const API = 'https://www.goodreads.com/book/title.xml?key=Uxb0zPb86N4STVy2ECWYA&title=harry potter ';
 
 https.get(API, (res) => {
     res.setEncoding('utf8');

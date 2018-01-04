@@ -3,7 +3,7 @@
 const helpers = {};
 
 
-helpers.getISBN = (cDataISBN) => {
+helpers.stripCDATA = (cDataISBN) => {
     const regex = /<!\[CDATA\[(.*)]]>/g;
     let m;
     let matched;
@@ -21,6 +21,14 @@ helpers.getISBN = (cDataISBN) => {
     return matched;
 }
 
+helpers.newStripCDATA = (text) => {
+    if (text.indexOf('<!\[CDATA\[') === 0) {
+        text = text.substring('<!\[CDATA\['.length, text.length)
+    }
+    const matches = text.match(/(.*)(?=]]>)/g);
+    return (matches) ? matches[0] : text;
+}
+
 helpers.getPopularCategories = (popularShelves) => {
     if (popularShelves.length > 20) {
         popularShelves = popularShelves.slice(0, 20);
@@ -33,6 +41,15 @@ helpers.getPopularCategories = (popularShelves) => {
         });
     });
     return shelves;
+}
+
+helpers.stripHTML = (text) => {
+    if (text.indexOf('<!\[CDATA\[') === 0) {
+        text = text.substring('<!\[CDATA\['.length, text.length)
+    }
+    const matches = text.match(/(.*)(?=]]>)/g);
+    text = (matches) ? matches[0] : text;
+    return text.replace(/<\/?[^>]+(>|$)/g, "");
 }
 
 module.exports = helpers;

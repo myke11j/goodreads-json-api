@@ -1,13 +1,16 @@
 'use stinct';
 
 module.exports = [
+  /**
+   * Request element mapping <Request>
+   */
   {
     'type': 'Request',
     'mapping': [
       {
         'key': 'key',
         'jsonKey': 'key',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       },
       {
         'key': 'authentication',
@@ -16,11 +19,14 @@ module.exports = [
       {
         'key': 'method',
         'jsonKey': 'method',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       }
     ]
   },
 
+  /**
+   * work-ids element mapping <work-ids>
+   */
   {
     'type': 'work-ids',
     'mapping': [
@@ -31,13 +37,16 @@ module.exports = [
     ]
   },
 
+  /**
+   * book element mapping <book>
+   */
   {
     'type': 'book',
     'mapping': [
       {
         'key': 'isbn',
         'jsonKey': 'isbn',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       },
       {
         'key': 'id',
@@ -46,16 +55,17 @@ module.exports = [
       {
         'key': 'isbn13',
         'jsonKey': 'isbn13',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       },
       {
         'key': 'title',
-        'jsonKey': 'title'
+        'jsonKey': 'title',
+        'helper': 'newStripCDATA'
       },
       {
         'key': 'url',
         'jsonKey': 'url',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       },
       {
         'key': 'small_image_url',
@@ -64,7 +74,7 @@ module.exports = [
       {
         'key': 'num_pages',
         'jsonKey': 'num_pages',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       },
       {
         'key': 'image_url',
@@ -73,12 +83,12 @@ module.exports = [
       {
         'key': 'link',
         'jsonKey': 'link',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       },
       {
         'key': 'format',
         'jsonKey': 'format',
-        'helper': 'getISBN'
+        'helper': 'stripCDATA'
       },
       {
         'key': 'publisher',
@@ -107,11 +117,14 @@ module.exports = [
       {
         'key': 'description',
         'jsonKey': 'description',
-        'helper': 'getISBN'
+        'helper': 'stripHTML'
       },
     ]
   },
 
+  /**
+   * author element mapping <author>
+   */
   {
     'type': 'author',
     'mapping': [
@@ -134,6 +147,9 @@ module.exports = [
     ]
   },
 
+  /**
+   * popular_shelves element mapping <popular_shelves>
+   */
   {
     'type': 'popular_shelves',
     'mapping': [
@@ -145,6 +161,9 @@ module.exports = [
     ]
   },
 
+  /**
+   * shelf element mapping <shelf>
+   */
   {
     'type': 'shelf',
     'mapping': [
@@ -159,6 +178,9 @@ module.exports = [
     ]
   },
 
+  /**
+   * similar_books element mapping <similar_books>
+   */
   {
     'type': 'similar_books',
     'mapping': [
